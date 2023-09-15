@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Roll Dice</title>
+</head>
+<body>
+<h1>Guess the number</h1>
+
+<a href="/roll-dice/1">1</a>
+<a href="/roll-dice/2">2</a>
+<a href="/roll-dice/3">3</a>
+<a href="/roll-dice/4">4</a>
+<a href="/roll-dice/5">5</a>
+<a href="/roll-dice/6">6</a>
+
+<h2>Your Guess: </h2>
+<h3 th:text="${num}"></h3>
+
+<h2>Numbers Rolled: </h2>
+<h3 th:text="${randomNumbers}"></h3>
+
+
+<!--<div th:if="${randomNumber != null && randomNumber == num}">-->
+<!--    You guessed correctly!-->
+<!--</div>-->
+
+<!--<div th:if="${randomNumber != num}">-->
+<!--    Your guess was incorrect. Try again.-->
+<!--</div>-->
+
+<h2>How many rolls that were correct: </h2>
+<p th:text="${counter}">
+
+</body>
+</html>
