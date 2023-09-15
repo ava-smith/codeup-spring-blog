@@ -11,6 +11,6 @@ import lombok.Setter;
 @AllArgsConstructor
 public class Post {
     private String title;
-    private String description;
+    private String body;
 
 }

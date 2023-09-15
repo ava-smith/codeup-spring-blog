@@ -25,7 +25,7 @@ public class PostController {
     public String viewIndividualPost(@PathVariable long id, Model model) {
         Post post = new Post();
         post.setTitle("New post");
-        post.setDescription("This is the description");
+        post.setBody("This is the description");
         model.addAttribute("post", post);
 
         return "posts/show";
