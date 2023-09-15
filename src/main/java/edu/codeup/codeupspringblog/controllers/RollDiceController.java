@@ -9,7 +9,6 @@ import java.util.List;
 
 @Controller
 public class RollDiceController {
-    private int counter = 0;
 
     @GetMapping("/roll-dice")
     public String rollDiceView() {
@@ -32,6 +31,7 @@ public class RollDiceController {
         randomNumbers.add(randomNumber5);
         randomNumbers.add(randomNumber6);
 
+        int counter = 0;
         for(int i = 0; i < randomNumbers.size(); i++) {
             if(randomNumbers.get(i) == num) {
                 counter++;
