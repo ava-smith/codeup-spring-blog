@@ -18,8 +18,8 @@ public class MathController {
     @GetMapping("/subtract/{num1}/from/{num2}")
     @ResponseBody
     public String subtract(@PathVariable int num1, @PathVariable int num2) {
-        int difference = num1 - num2;
-        return String.format("%s - %s = %s", num1, num2, difference);
+        int difference = num2 - num1;
+        return String.format("%s - %s = %s", num2, num1, difference);
     }
 
     @GetMapping("/multiply/{num1}/and/{num2}")
@@ -31,8 +31,8 @@ public class MathController {
 
     @GetMapping("/divide/{num1}/by/{num2}")
     @ResponseBody
-    public String divide(@PathVariable int num1, @PathVariable int num2) {
-        int quotient = num1 / num2;
+    public String divide(@PathVariable double num1, @PathVariable double num2) {
+        double quotient = num1 / num2;
         return String.format("%s / %s = %s", num1, num2, quotient);
     }
 }
