@@ -1,6 +1,7 @@
 package edu.codeup.codeupspringblog.controllers;
 
 import edu.codeup.codeupspringblog.model.Post;
+import edu.codeup.codeupspringblog.repositories.PostRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -12,34 +13,39 @@ import java.util.List;
 @RequestMapping("/posts")
 public class PostController {
 
+    private PostRepository postsDao;
+
+    public PostController(PostRepository postsDao) {
+        this.postsDao = postsDao;
+    }
+
     @GetMapping("")
     public String indexPage(Model model) {
-        List<Post> posts = new ArrayList<>();
-        posts.add(new Post("Hello", "Hello world"));
-        posts.add(new Post("Test", "testing"));
-        model.addAttribute("posts", posts);
+        model.addAttribute("posts", postsDao.findAll());
         return "posts/index";
     }
 
     @GetMapping("/{id}")
     public String viewIndividualPost(@PathVariable long id, Model model) {
-        Post post = new Post();
-        post.setTitle("New post");
-        post.setBody("This is the description");
-        model.addAttribute("post", post);
-
+        if(postsDao.existsById(id)) {
+            Post post = postsDao.findById(id).get();
+            model.addAttribute("post", post);
+        }
         return "posts/show";
     }
 
     @GetMapping("/create")
-    @ResponseBody
     public String showCreatePostView() {
-        return "view the form for creating a post";
+        return "posts/create";
     }
 
+
     @PostMapping("/create")
-    @ResponseBody
-    public String createPost() {
-        return "create a new post";
+    public String createPost(@RequestParam(name = "post-title") String title, @RequestParam(name = "post-description") String body) {
+        Post newPost = new Post();
+        newPost.setTitle(title);
+        newPost.setBody(body);
+        postsDao.save(newPost);
+        return "redirect:/posts";
     }
 }
