@@ -7,6 +7,7 @@
     <header th:replace="partials/partials :: header(${post.title})"></header>
     <main class="container">
         <p th:text="${post.body}"></p>
+        <p>The user's email: <span th:text="${user.email}"></span></p>
     </main>
     <footer th:replace="partials/partials :: footer"></footer>
 </div>
