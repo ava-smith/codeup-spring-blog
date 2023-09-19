@@ -30,8 +30,9 @@ public class PostController {
         if(postsDao.existsById(id)) {
             Post post = postsDao.findById(id).get();
             model.addAttribute("post", post);
+            return "posts/show";
         }
-        return "posts/show";
+        return "redirect:/posts";
     }
 
     @GetMapping("/create")
