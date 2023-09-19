@@ -41,7 +41,10 @@ public class PostController {
 
 
     @PostMapping("/create")
-    public String createPost(@RequestParam(name = "post-title") String title, @RequestParam(name = "post-description") String body) {
+    public String createPost(
+            @RequestParam(name = "post-title") String title,
+            @RequestParam(name = "post-description") String body
+    ) {
         Post newPost = new Post();
         newPost.setTitle(title);
         newPost.setBody(body);

@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="partials/header :: head"></head>
+<head th:replace="partials/partials :: head('Posts')"></head>
 <body>
-<navbar th:replace="partials/navbar :: navbar"></navbar>
-<h1>This is the index</h1>
-
-<div th:each="post : ${posts}">
-    <h2 class="text-primary" th:text="${post.title}"/>
-    <p th:text="${post.body}"></p>
+<div id="wrapper">
+    <nav th:replace="partials/partials :: nav"></nav>
+    <header th:replace="partials/partials :: header('Posts')"></header>
+    <main class="container">
+        <article th:each="post : ${posts}">
+            <h2 th:text="${post.title}"></h2>
+            <p th:text="${post.body}"></p>
+        </article>
+    </main>
+    <footer th:replace="partials/partials :: footer"></footer>
 </div>
-
-<footer th:replace="partials/footer :: footer"></footer>
+<th:block th:replace="partials/partials :: scripts"></th:block>
 </body>
-</html>

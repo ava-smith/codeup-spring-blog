@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="partials/header :: head"></head>
+<head th:replace="partials/partials :: head('Post Details')"></head>
 <body>
-<navbar th:replace="partials/navbar :: navbar"></navbar>
-<h1>This shows an individual post</h1>
-
-<h2 th:text="${post.title}"></h2>
-<p th:text="${post.body}"></p>
-
-<footer th:replace="partials/footer :: footer"></footer>
+<div id="wrapper">
+    <nav th:replace="partials/partials :: nav"></nav>
+    <header th:replace="partials/partials :: header(${post.title})"></header>
+    <main class="container">
+        <p th:text="${post.body}"></p>
+    </main>
+    <footer th:replace="partials/partials :: footer"></footer>
+</div>
+<th:block th:replace="partials/partials :: scripts"></th:block>
 </body>
-</html>
