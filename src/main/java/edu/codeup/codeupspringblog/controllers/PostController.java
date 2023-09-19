@@ -51,9 +51,9 @@ public class PostController {
             @RequestParam(name = "post-title") String title,
             @RequestParam(name = "post-description") String body
     ) {
-        User user = new User("ava", "ava@email.com", "password");
+        User currentUser = usersDao.findById(1L).get();
         Post newPost = new Post();
-        newPost.setUser(user);
+        newPost.setUser(currentUser);
         newPost.setTitle(title);
         newPost.setBody(body);
         postsDao.save(newPost);
