@@ -57,4 +57,20 @@ public class PostController {
         postsDao.save(postToSave);
         return "redirect:/posts";
     }
+
+    @GetMapping("/{id}/edit")
+    public String showEditView(Model model, @PathVariable long id) {
+        Post postToEdit = postsDao.findById(id).get();
+        model.addAttribute("post", postToEdit);
+        return "posts/edit";
+    }
+
+    @PostMapping("/{id}/edit")
+    public String editPost(@ModelAttribute Post post, @PathVariable long id) {
+        Post postToEdit = postsDao.findById(id).get();
+        postToEdit.setTitle(post.getTitle());
+        postToEdit.setBody(post.getBody());
+        postsDao.save(postToEdit);
+        return "redirect:/posts/" + id;
+    }
 }
