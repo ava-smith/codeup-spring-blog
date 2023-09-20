@@ -34,7 +34,7 @@ public class PostController {
         if(postsDao.existsById(id)) {
             Post post = postsDao.findById(id).get();
             model.addAttribute("post", post);
-            model.addAttribute("user", post.getUser());
+//            model.addAttribute("user", post.getUser());
             return "posts/show";
         }
         return "redirect:/posts";
