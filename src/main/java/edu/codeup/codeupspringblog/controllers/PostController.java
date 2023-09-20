@@ -34,29 +34,27 @@ public class PostController {
         if(postsDao.existsById(id)) {
             Post post = postsDao.findById(id).get();
             model.addAttribute("post", post);
-//            model.addAttribute("user", post.getUser());
             return "posts/show";
         }
         return "redirect:/posts";
     }
 
     @GetMapping("/create")
-    public String showCreatePostView() {
+    public String showCreatePostView(Model model) {
+        model.addAttribute("post", new Post());
         return "posts/create";
     }
 
 
     @PostMapping("/create")
-    public String createPost(
-            @RequestParam(name = "post-title") String title,
-            @RequestParam(name = "post-description") String body
-    ) {
+    public String createPost(@ModelAttribute Post post) {
         User currentUser = usersDao.findById(1L).get();
-        Post newPost = new Post();
-        newPost.setUser(currentUser);
-        newPost.setTitle(title);
-        newPost.setBody(body);
-        postsDao.save(newPost);
+        Post postToSave = new Post(
+                post.getTitle(),
+                post.getBody(),
+                currentUser
+        );
+        postsDao.save(postToSave);
         return "redirect:/posts";
     }
 }

@@ -6,11 +6,11 @@
     <nav th:replace="partials/partials :: nav"></nav>
     <header th:replace="partials/partials :: header('Create a post')"></header>
     <main class="container">
-        <form th:action="@{/posts/create}" th:method="POST">
-            <label for="post-title">Title: </label>
-            <input id="post-title" type="text" name="post-title" class="form-control wbd">
-            <label for="post-description">Description: </label>
-            <textarea id="post-description" type="text" name="post-description" class="form-control wbd"></textarea>
+        <form th:action="@{/posts/create}" th:method="POST" th:object="${post}">
+            <label for="title">Title: </label>
+            <input id="title" type="text" th:field="*{title}" class="form-control wbd">
+            <label for="body">Description: </label>
+            <textarea id="body" th:field="*{body}" class="form-control wbd"></textarea>
             <button class="btn btn-primary" type="submit">Submit</button>
         </form>
     </main>
