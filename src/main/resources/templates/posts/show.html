@@ -8,9 +8,9 @@
     <main class="container">
         <p th:text="${post.body}"></p>
         <p>The user's email: <span th:text="${post.user.email}"></span></p>
-        <div sec:authorize="isAuthenticated()">
-        <a th:href="@{|/posts/${post.id}/edit|}" th:if="${#authentication.principal.id == post.user.id}">Edit post</a>
-        </div>
+        <form th:action="@{|/posts/${post.id}/edit|}" th:method="GET" sec:authorize="isAuthenticated()">
+            <button th:if="${#authentication.principal.id == post.user.id}" type="submit" class="btn btn-primary">Edit post</button>
+        </form>
     </main>
     <footer th:replace="partials/partials :: footer"></footer>
 </div>
