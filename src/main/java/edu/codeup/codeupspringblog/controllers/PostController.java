@@ -5,6 +5,7 @@ import edu.codeup.codeupspringblog.model.User;
 import edu.codeup.codeupspringblog.repositories.PostRepository;
 import edu.codeup.codeupspringblog.repositories.UserRepository;
 import edu.codeup.codeupspringblog.services.EmailSvc;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -51,20 +52,26 @@ public class PostController {
 
     @PostMapping("/create")
     public String createPost(@ModelAttribute Post post) {
-        User currentUser = usersDao.findById(1L).get();
+        User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = usersDao.findById(currentUser.getId()).get();
         Post postToSave = new Post(
                 post.getTitle(),
                 post.getBody(),
-                currentUser
+                user
         );
         postsDao.save(postToSave);
-        emailSvc.prepareAndSend(currentUser, "You created a post!!", "Here is some more information about the post you created... yay.");
+        emailSvc.prepareAndSend(postToSave, "You created a post!!", "Here is some more information about the post you created... yay.");
         return "redirect:/posts";
     }
 
     @GetMapping("/{id}/edit")
     public String showEditView(Model model, @PathVariable long id) {
+        User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = usersDao.findById(currentUser.getId()).get();
         Post postToEdit = postsDao.findById(id).get();
+        if(postToEdit.getUser() != user){
+            return "redirect:/posts/" + id;
+        }
         model.addAttribute("post", postToEdit);
         return "posts/edit";
     }

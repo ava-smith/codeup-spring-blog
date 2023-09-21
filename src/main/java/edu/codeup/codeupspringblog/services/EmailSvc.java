@@ -1,6 +1,7 @@
 package edu.codeup.codeupspringblog.services;
 
 import edu.codeup.codeupspringblog.model.Ad;
+import edu.codeup.codeupspringblog.model.Post;
 import edu.codeup.codeupspringblog.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,10 +19,10 @@ public class EmailSvc {
     @Value("${spring.mail.from}")
     private String from;
 
-    public void prepareAndSend(User user, String subject, String body) {
+    public void prepareAndSend(Post post, String subject, String body) {
         SimpleMailMessage msg = new SimpleMailMessage();
         msg.setFrom(from);
-        msg.setTo(user.getEmail());
+        msg.setTo(post.getUser().getEmail());
         msg.setSubject(subject);
         msg.setText(body);
 

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="partials/partials :: head('Login')"></head>
+<body>
+<h1>Log In</h1>
+<div th:if="${param.error}">
+  Invalid Username and Password.
+</div>
+<div th:if="${param.logout}">
+  You have been logged out.
+</div>
+
+<form th:action="@{/login}" method="post">
+  <label for="username">Username</label>
+  <input id="username" name="username" type="text" />
+  <label for="password">Password</label>
+  <input id="password" name="password" type="password" />
+  <input type="submit" value="Log In" />
+</form>
+</body>
+</html>
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head th:replace="partials/partials :: head('Create')"></head>-->
+<!--<body>-->
+<!--<div id="wrapper">-->
+<!--  <nav th:replace="partials/partials :: nav"></nav>-->
+<!--  <header th:replace="partials/partials :: header('Create a post')"></header>-->
+<!--  <main class="container">-->
+<!--    <form th:action="@{/posts/create}" th:method="POST" th:object="${post}">-->
+<!--      <label for="title">Title: </label>-->
+<!--      <input id="title" type="text" th:field="*{title}" class="form-control wbd">-->
+<!--      <label for="body">Description: </label>-->
+<!--      <textarea id="body" th:field="*{body}" class="form-control wbd"></textarea>-->
+<!--      <button class="btn btn-primary" type="submit">Create post</button>-->
+<!--    </form>-->
+<!--  </main>-->
+<!--  <footer th:replace="partials/partials :: footer"></footer>-->
+<!--</div>-->
+<!--<th:block th:replace="partials/partials :: scripts"></th:block>-->
+<!--</body>-->

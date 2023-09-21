@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="partials/partials :: head('Edit')"></head>
 <body>
-<div id="wrapper">
+<div id="wrapper" sec:authorize="isAuthenticated()">
   <nav th:replace="partials/partials :: nav"></nav>
   <header th:replace="partials/partials :: header('Edit your post')"></header>
   <main class="container">
-    <form th:object="${post}" th:action="@{|/posts/${post.id}/edit|}" th:method="POST">
+    <form th:object="${post}" th:action="@{|/posts/${post.id}/edit|}" th:method="POST" >
       <label for="title">Title: </label>
       <input id="title" type="text" th:field="*{title}" class="form-control wbd">
       <label for="body">Description: </label>
